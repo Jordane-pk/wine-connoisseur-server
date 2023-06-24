@@ -13,11 +13,17 @@ const MongoStore = require('connect-mongo') (session);
 //require('./config/database.config') // when I will have cloudinary
 
 
-let MONGODB_URL =  process.env.MONGODB_URL || "mongodb://localhost/wine-connoisseur-server"
+let MONGODB_URI =  "mongodb://127.0.0.1:27017/wineco"
 
-
+const options = {
+  socketTimeoutMS: 30000,
+  keepAlive: true,
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  useCreateIndex: true
+};
 mongoose
-  .connect(MONGODB_URL, {useNewUrlParser: true})
+  .connect(MONGODB_URI, options)
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,7 +41,7 @@ const app = express();
 const cors = require('cors')
 app.use(cors({
   credentials: true, 
-  origin: ['http://localhost:3000', process.env.PUBLIC_DOMAIN]
+  origin: ['http://localhost:4000', process.env.PUBLIC_DOMAIN]
 }))
 
 // Middleware Setup

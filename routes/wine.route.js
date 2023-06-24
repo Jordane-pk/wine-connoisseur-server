@@ -19,7 +19,7 @@ const express = require("express");
 	    })
 	    .catch((err) => {
 	      res.status(500).json({
-	        error: "Something went wrong",
+	        error: "Something went wrong!!",
 	        message: err,
 	      });
 	    });
